@@ -1,6 +1,9 @@
 buildscript {
     dependencies {
         classpath "cloud.wondrify:asset-pipeline-gradle"
+        // Required: asset-pipeline-core uses groovy.json.JsonSlurperClassic
+        // which lives in groovy-json but is not pulled in transitively
+        classpath "org.apache.groovy:groovy-json"
     }
 }
 
@@ -13,25 +16,25 @@ apply plugin: "org.apache.grails.gradle.grails-gsp"
 apply plugin: "org.apache.grails.gradle.grails-plugin"
 
 dependencies {
-    profile "org.apache.grails.profiles:web-plugin"
-
+    console "org.apache.grails:grails-console"
+    developmentOnly "org.springframework.boot:spring-boot-devtools"
     implementation platform("org.apache.grails:grails-bom:$grailsVersion")
-    api "org.apache.grails:grails-web-boot"
-    api "org.apache.grails:grails-gsp"
-    api "org.apache.grails:grails-interceptors"
-    api "org.apache.grails:grails-core"
-    api "org.apache.grails:grails-url-mappings"
-    api "org.apache.grails.web:grails-web-common"
-    api "org.apache.grails.web:grails-web-url-mappings"
-    api "com.github.ben-manes.caffeine:caffeine"
+    implementation "org.springframework.boot:spring-boot-starter-logging"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation "org.springframework.boot:spring-boot-autoconfigure"
+    implementation "org.springframework.boot:spring-boot-starter"
+    implementation "org.apache.grails:grails-core"
+    implementation "org.apache.grails:grails-url-mappings"
+    implementation "org.apache.grails:grails-web-boot"
+    implementation "org.apache.grails:grails-logging"
+    implementation "org.apache.grails:grails-rest-transforms"
+    implementation "org.apache.grails:grails-databinding"
+    implementation "com.github.ben-manes.caffeine:caffeine"
+    profile "org.apache.grails.profiles:web-plugin"
+    runtimeOnly "org.fusesource.jansi:jansi"
     runtimeOnly "cloud.wondrify:asset-pipeline-grails"
+    testImplementation "org.apache.grails:grails-testing-support-datamapping"
+    testImplementation "org.spockframework:spock-core"
 }
-
-assets {
-    minifyJs = true
-    minifyCss = true
-    enableSourceMaps = false
-}
-
 
 bootJar.enabled = false
