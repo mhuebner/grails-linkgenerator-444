@@ -1,0 +1,28 @@
+grails:
+    serverURL: http://localhost:8080
+
+server:
+    port: 8080
+
+---
+hibernate:
+    cache:
+        queries: false
+
+dataSource:
+    pooled: true
+    jmxExport: true
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ''
+
+environments:
+    development:
+        dataSource:
+            dbCreate: create-drop
+            url: jdbc:h2:mem:devDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+    test:
+        dataSource:
+            dbCreate: update
+            url: jdbc:h2:mem:testDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+

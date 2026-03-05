@@ -1,0 +1,42 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url = 'https://repo.grails.org/grails/restricted' }
+    }
+    dependencies {
+        classpath platform("org.apache.grails:grails-bom:$grailsVersion")
+        classpath "org.apache.grails:grails-gradle-plugins"
+    }
+}
+
+allprojects { project ->
+    repositories {
+        mavenCentral()
+        maven { url = 'https://repo.grails.org/grails/restricted' }
+    }
+
+    tasks.withType(GroovyCompile) {
+        groovyOptions.encoding = "UTF-8"
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    tasks.withType(Test).configureEach {
+        useJUnitPlatform()
+    }
+}
+
+subprojects { subproject ->
+    buildscript {
+        repositories {
+            mavenCentral()
+            maven { url = 'https://repo.grails.org/grails/restricted' }
+        }
+        dependencies {
+            classpath platform("org.apache.grails:grails-bom:$grailsVersion")
+            classpath "org.apache.grails:grails-gradle-plugins"
+        }
+    }
+}

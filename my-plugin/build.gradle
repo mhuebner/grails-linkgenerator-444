@@ -1,0 +1,37 @@
+buildscript {
+    dependencies {
+        classpath "cloud.wondrify:asset-pipeline-gradle"
+    }
+}
+
+plugins {
+    id 'java-library'
+}
+
+apply plugin: "cloud.wondrify.asset-pipeline"
+apply plugin: "org.apache.grails.gradle.grails-gsp"
+apply plugin: "org.apache.grails.gradle.grails-plugin"
+
+dependencies {
+    profile "org.apache.grails.profiles:web-plugin"
+
+    implementation platform("org.apache.grails:grails-bom:$grailsVersion")
+    api "org.apache.grails:grails-web-boot"
+    api "org.apache.grails:grails-gsp"
+    api "org.apache.grails:grails-interceptors"
+    api "org.apache.grails:grails-core"
+    api "org.apache.grails:grails-url-mappings"
+    api "org.apache.grails.web:grails-web-common"
+    api "org.apache.grails.web:grails-web-url-mappings"
+    api "com.github.ben-manes.caffeine:caffeine"
+    runtimeOnly "cloud.wondrify:asset-pipeline-grails"
+}
+
+assets {
+    minifyJs = true
+    minifyCss = true
+    enableSourceMaps = false
+}
+
+
+bootJar.enabled = false

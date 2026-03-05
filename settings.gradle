@@ -1,0 +1,4 @@
+rootProject.name = 'grails-linkgenerator-repro'
+
+include 'my-plugin', 'my-app'
+

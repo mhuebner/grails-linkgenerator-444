@@ -1,0 +1,32 @@
+buildscript {
+    dependencies {
+        classpath "cloud.wondrify:asset-pipeline-gradle"
+    }
+}
+
+apply plugin: "org.apache.grails.gradle.grails-web"
+apply plugin: "cloud.wondrify.asset-pipeline"
+
+assets {
+    minifyJs = true
+    minifyCss = true
+    enableSourceMaps = false
+}
+
+dependencies {
+    console "org.apache.grails:grails-console"
+    implementation platform("org.apache.grails:grails-bom:$grailsVersion")
+    implementation "org.springframework.boot:spring-boot-starter-logging"
+    implementation "org.springframework.boot:spring-boot-autoconfigure"
+    implementation "org.springframework.boot:spring-boot-starter"
+    implementation "org.springframework.boot:spring-boot-starter-tomcat"
+    implementation "org.apache.grails:grails-scaffolding"
+    implementation(project(':my-plugin'))
+    profile "org.apache.grails.profiles:web"
+    runtimeOnly "cloud.wondrify:asset-pipeline-grails"
+}
+
+bootRun {
+    jvmArgs = ['-Dspring.output.ansi.enabled=always']
+}
+
